@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lean Aesthetic — 1m75</title>
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #1f2833;
+            --accent-color: #66fcf1;
+            --accent-dim: #45a29e;
+            --text-color: #c5c6c7;
+            --text-light: #ffffff;
+            --border-color: #2f3e46;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1f2833 0%, #0b0c10 100%);
+            border-radius: 16px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            color: var(--text-light);
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .objectives {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .objective-tag {
+            background: rgba(102, 252, 241, 0.1);
+            border: 1px solid var(--accent-color);
+            color: var(--text-light);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(102, 252, 241, 0.4);
+        }
+
+        .day-section {
+            display: none;
+        }
+
+        .day-section.active {
+            display: block;
+        }
+
+        .day-title {
+            font-size: 1.8rem;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .exercise-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .exercise-info {
+            padding: 20px;
+        }
+
+        .exercise-name {
+            color: var(--text-light);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .exercise-sets {
+            display: inline-block;
+            color: var(--accent-color);
+            font-family: monospace;
+            font-weight: 600;
+            font-size: 1rem;
+            background: rgba(102, 252, 241, 0.05);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(102, 252, 241, 0.2);
+        }
+
+        .cardio-box {
+            background: linear-gradient(135deg, #1f2833 0%, #0b0c10 100%);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .cardio-title {
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .diet-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .diet-title {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .diet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .diet-list h4 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .diet-list ul {
+            list-style-type: none;
+        }
+
+        .diet-list li {
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .diet-list li::before {
+            content: "•";
+            color: var(--accent-dim);
+            position: absolute;
+            left: 0;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .nav-tabs { flex-direction: column; }
+            .tab-btn { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Lean Aesthetic 1m75</h1>
+            <div class="subtitle">Objectif: Paraître mince mais athlétique</div>
+            <div class="objectives">
+                <span class="objective-tag">Épaules Larges / Taille Fine</span>
+                <span class="objective-tag">Abdos Visibles</span>
+                <span class="objective-tag">Low Bodyfat (10-12%)</span>
+            </div>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchDay('day1')">Jour 1: PUSH</button>
+            <button class="tab-btn" onclick="switchDay('day2')">Jour 2: PULL</button>
+            <button class="tab-btn" onclick="switchDay('day3')">Jour 3: LEGS & ABS</button>
+            <button class="tab-btn" onclick="switchDay('diet')">Nutrition & Target</button>
+        </div>
+
+        <!-- JOUR 1: PUSH -->
+        <section id="day1" class="day-section active">
+            <h2 class="day-title">Jour 1 — PUSH (Pecs, Épaules, Triceps)</h2>
+            <div class="exercise-grid">
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/Z66Wp2FmI6s" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Incline Chest Press Machine</div>
+                        <div class="exercise-sets">4 × 8-10</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/wzZ-8YVbWio" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Chest Press Machine</div>
+                        <div class="exercise-sets">3 × 8-12</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/4asVwH_T8G0" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Pec Deck</div>
+                        <div class="exercise-sets">3 × 12-15</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/3VcKaXatvwg" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Élévations latérales</div>
+                        <div class="exercise-sets">4 × 12-15</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/HzIiNhHhhtA" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Shoulder Press Machine</div>
+                        <div class="exercise-sets">3 × 8-10</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/vB5OHsJ3EME" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Pushdown corde</div>
+                        <div class="exercise-sets">3 × 10-15</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/1u19bWwAm9A" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Extension overhead câble</div>
+                        <div class="exercise-sets">2 × 12</div>
+                    </div>
+                </div>
+            </div>
+            <div class="cardio-box">
+                <div class="cardio-title">Cardio Recommandé</div>
+                <p>15 à 30 minutes de tapis incliné — Pente: 10-15% — Vitesse: 4-6 km/h</p>
+            </div>
+        </section>
+
+        <!-- JOUR 2: PULL -->
+        <section id="day2" class="day-section">
+            <h2 class="day-title">Jour 2 — PULL (Dos, Biceps)</h2>
+            <div class="exercise-grid">
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/CAwf7n6Luuc" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Lat Pulldown large</div>
+                        <div class="exercise-sets">4 × 8-12</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/GZbfZ033fEE" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Row assis machine</div>
+                        <div class="exercise-sets">4 × 8-12</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/H75im9fA19A" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Row poitrine appuyée</div>
+                        <div class="exercise-sets">3 × 10-12</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/rep-qV54BFc" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Face Pull</div>
+                        <div class="exercise-sets">3 × 12-15</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/N60N2C73_hM" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Curl machine</div>
+                        <div class="exercise-sets">3 × 10-12</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/TwD-YGVP4Bk" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Curl marteau corde</div>
+                        <div class="exercise-sets">2 × 10-12</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/Pr1ieGZ576s" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Hanging Leg Raises</div>
+                        <div class="exercise-sets">3 séries</div>
+                    </div>
+                </div>
+            </div>
+            <div class="cardio-box">
+                <div class="cardio-title">Cardio Recommandé</div>
+                <p>15 à 30 minutes de tapis incliné — Pente: 10-15% — Vitesse: 4-6 km/h</p>
+            </div>
+        </section>
+
+        <!-- JOUR 3: LEGS -->
+        <section id="day3" class="day-section">
+            <h2 class="day-title">Jour 3 — LEGS + ABS (Jambes, Abdos)</h2>
+            <div class="exercise-grid">
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/yZmx_7cxY-E" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Leg Press</div>
+                        <div class="exercise-sets">4 × 10-12</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/1Tq3Qd1wLlM" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Leg Curl</div>
+                        <div class="exercise-sets">4 × 10-12</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/2C-uNgKwPLE" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Bulgarian Split Squat</div>
+                        <div class="exercise-sets">3 × 10 / jambe</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/m0FOpMEger0" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Leg Extension</div>
+                        <div class="exercise-sets">3 × 12-15</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/gwLzBJYoWlU" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Calf Raises</div>
+                        <div class="exercise-sets">4 × 15-20</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/kj8X8mCPhbM" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Cable Crunch</div>
+                        <div class="exercise-sets">3 séries</div>
+                    </div>
+                </div>
+                <div class="exercise-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/YNsrK3M-O2g" allowfullscreen></iframe>
+                    </div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">Planche</div>
+                        <div class="exercise-sets">3 × 45-60 sec</div>
+                    </div>
+                </div>
+            </div>
+            <div class="cardio-box">
+                <div class="cardio-title">Cardio Recommandé</div>
+                <p>15 à 30 minutes de tapis incliné — Pente: 10-15% — Vitesse: 4-6 km/h</p>
+            </div>
+        </section>
+
+        <!-- NUTRITION & TARGET -->
+        <section id="diet" class="day-section">
+            <h2 class="day-title">Plan Bodyfat & Nutrition</h2>
+            <div class="diet-section">
+                <h3 class="diet-title">Principes Clés pour 10-12% Bodyfat</h3>
+                <div class="diet-grid">
+                    <div class="diet-list">
+                        <h4>À privilégier</h4>
+                        <ul>
+                            <li>Poulet &amp; Viandes maigres</li>
+                            <li>Œufs</li>
+                            <li>Riz &amp; Pommes de terre</li>
+                            <li>Fruits &amp; Légumes</li>
+                            <li>Yogourt grec</li>
+                        </ul>
+                    </div>
+                    <div class="diet-list">
+                        <h4>À limiter</h4>
+                        <ul>
+                            <li>Fast-food</li>
+                            <li>Boissons sucrées</li>
+                            <li>Snacks ultra transformés</li>
+                            <li>Alcool</li>
+                        </ul>
+                    </div>
+                    <div class="diet-list">
+                        <h4>Activité</h4>
+                        <ul>
+                            <li>Déficit calorique léger</li>
+                            <li>Beaucoup de protéines</li>
+                            <li>Cardio régulier</li>
+                            <li>8k à 12k pas / jour</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="diet-title" style="margin-top: 30px;">Objectifs de Poids (1m75)</h3>
+                <p><strong>68 à 72 kg :</strong> Look très lean / Mannequin fitness</p>
+                <p><strong>72 à 75 kg :</strong> Physique athlétique esthétique</p>
+                <p><strong>80+ kg :</strong> Look plus massif</p>
+                <p style="margin-top: 15px; color: var(--accent-color); font-style: italic;">Le plus important reste le bodyfat et les proportions !</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function switchDay(dayId) {
+            // Remove active class from all sections
+            const sections = document.querySelectorAll('.day-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Add active class to target section and button
+            document.getElementById(dayId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
